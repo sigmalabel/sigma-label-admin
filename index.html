@@ -79,16 +79,16 @@
     .profile-menu h3 { font-size:.96rem; margin-bottom:10px; }
     .menu-actions { display:grid; gap:9px; margin-top:10px; }
 
-    .workspace { padding: 16px; }
+    .workspace { padding: 16px 16px 48px; }
     .board-head { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin: 0 auto 16px; width:min(1880px, 100%); }
     .board-title h1 { font-family:Syne, sans-serif; text-transform:uppercase; letter-spacing:-.055em; font-size: clamp(2rem, 5vw, 4rem); line-height:.92; }
     .board-title p { color:var(--muted); margin-top:8px; }
     .board-tools { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
     .search { width:min(340px, 100%); }
 
-    .board { position: relative; width:min(1880px, 100%); min-height: calc(100vh - 170px); margin: 0 auto; border:1px solid var(--line); border-radius:30px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025)); overflow:auto; box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
-    .board::before { content:""; position:absolute; inset:0; background-image: radial-gradient(rgba(255,255,255,.09) 1px, transparent 1px); background-size: 24px 24px; opacity:.4; pointer-events:none; }
-    .empty { position:absolute; inset:0; display:grid; place-items:center; text-align:center; color:var(--muted); padding: 30px; }
+    .board { position: relative; width:min(1880px, 100%); min-height: 420px; margin: 0 auto; border:1px solid var(--line); border-radius:30px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025)); overflow: visible; box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    .board::before { content:""; position:absolute; inset:0; background-image: radial-gradient(rgba(255,255,255,.09) 1px, transparent 1px); background-size: 24px 24px; opacity:.4; pointer-events:none; border-radius: inherit; }
+    .empty { min-height: 420px; display:grid; place-items:center; text-align:center; color:var(--muted); padding: 30px; }
     .empty strong { display:block; color:var(--text); font-size:1.05rem; }
 
     .note { position:absolute; width: 320px; border:1px solid var(--line); background:rgba(10,18,30,.92); backdrop-filter:blur(14px); border-radius:22px; padding:14px; box-shadow:0 18px 55px rgba(0,0,0,.28); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; touch-action:none; }
@@ -101,14 +101,23 @@
     .note-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom: 10px; }
     .drag-handle { cursor:grab; color:var(--muted); font-weight:950; letter-spacing:1px; padding:4px; user-select:none; }
     .note h2 { font-family:Syne, sans-serif; font-size:1.08rem; line-height:1; letter-spacing:-.035em; text-transform:uppercase; }
+    .release-artist { margin-top:6px; color:var(--cyan); font-size:.88rem; font-weight:900; letter-spacing:.02em; }
     .meta-grid { display:grid; gap:8px; margin: 12px 0; }
     .meta { border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.045); border-radius:14px; padding:9px 10px; }
     .meta small { display:block; color:var(--muted); font-size:.68rem; text-transform:uppercase; letter-spacing:.65px; font-weight:950; margin-bottom:2px; }
     .meta span, .meta a { color:#eaf5ff; overflow-wrap:anywhere; font-size:.84rem; }
-    .artists { display:grid; gap:7px; margin: 10px 0; }
+    .artists { display:grid; gap:7px; margin: 0 0 10px; }
+    .artists-label { color:var(--muted); font-size:.68rem; text-transform:uppercase; letter-spacing:.65px; font-weight:950; margin: 12px 0 8px; }
     .artist-row { border-radius:14px; background:rgba(0,229,255,.055); border:1px solid rgba(0,229,255,.12); padding:9px 10px; font-size:.82rem; }
-    .artist-row strong { display:block; }
-    .artist-row span { color:var(--muted); }
+    .artist-head { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .artist-row strong { display:block; font-size:.9rem; }
+    .artist-legal { display:block; color:var(--muted); margin-top:4px; font-size:.76rem; }
+    .platform-icons { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+    .platform-link { display:grid; place-items:center; width:30px; height:30px; border-radius:10px; border:1px solid var(--line); background:rgba(255,255,255,.06); transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+    .platform-link:hover { transform: translateY(-1px); border-color:var(--line-strong); background:rgba(255,255,255,.12); }
+    .platform-link svg { width:16px; height:16px; display:block; }
+    .platform-link.platform-spotify { color:#1ed760; }
+    .platform-link.platform-apple { color:#fc3c44; }
     .pill-row { display:flex; gap:7px; flex-wrap:wrap; margin: 10px 0; }
     .pill { display:inline-flex; align-items:center; min-height:28px; border-radius:999px; padding:0 10px; border:1px solid var(--line); color:#dbe8f5; background:rgba(255,255,255,.052); font-size:.72rem; font-weight:950; }
     .due-pill { border:1px solid var(--line); }
@@ -159,17 +168,47 @@
     .chat-status-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px; }
     .chat-helper { color:#8e9297; font-size:.78rem; }
     .confirm-modal .modal-card { max-width:460px; }
-    .create-modal .modal-card { width:min(780px, 100%); }
+    .create-modal .modal-card { width:min(860px, 100%); max-height:92vh; }
+    .create-modal .modal-body { padding: 0 22px 22px; }
+    .create-modal .modal-head { padding: 20px 22px; background: linear-gradient(135deg, rgba(0,229,255,.08), rgba(141,255,102,.06)); border-bottom: 1px solid var(--line); }
+    .create-modal .modal-head h2 { font-size: 1.15rem; }
+    .create-modal-sub { color: var(--muted); font-size: .84rem; margin-top: 4px; }
+    .create-scroll { overflow: auto; max-height: calc(92vh - 190px); padding-right: 4px; }
     .form-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; }
     .form-grid .wide { grid-column: 1 / -1; }
+    .form-stage { display:flex; align-items:center; gap:12px; margin: 22px 0 14px; }
+    .form-stage:first-child { margin-top: 8px; }
+    .form-stage-badge { width: 32px; height: 32px; display:grid; place-items:center; border-radius: 11px; background: linear-gradient(135deg, rgba(0,229,255,.18), rgba(141,255,102,.14)); border: 1px solid rgba(0,229,255,.28); color: var(--cyan); font-weight: 950; font-size: .78rem; flex-shrink: 0; }
+    .form-stage h3 { font-family: Syne, sans-serif; font-size: .92rem; text-transform: uppercase; letter-spacing: .04em; }
+    .form-stage p { color: var(--muted); font-size: .78rem; margin-left: auto; }
+    .create-divider { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); margin: 8px 0 4px; }
+    .create-artist-block { border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.028)); border-radius: 20px; padding: 16px; margin-bottom: 12px; transition: border-color .2s ease, box-shadow .2s ease; }
+    .create-artist-block:focus-within { border-color: var(--line-strong); box-shadow: 0 0 0 1px rgba(0,229,255,.12), 0 16px 40px rgba(0,0,0,.18); }
+    .create-artist-head { display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 12px; }
+    .create-artist-index { font-weight: 950; font-size: .88rem; color: #dcefff; letter-spacing: .02em; }
+    .create-remove-artist { width: 32px; height: 32px; display:grid; place-items:center; color: var(--muted); border: 1px solid var(--line); background: rgba(255,255,255,.05); border-radius: 11px; font-size: 1.1rem; transition: transform .18s ease, background .18s ease, color .18s ease; }
+    .create-remove-artist:hover { color: #fff; background: rgba(255,93,115,.18); border-color: rgba(255,93,115,.35); transform: rotate(8deg); }
+    .link-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .field-head { display:flex; align-items:center; justify-content:space-between; gap: 10px; margin-bottom: 7px; }
+    .field-head label { margin-bottom: 0 !important; }
+    .link-toggle { color: #cde8f6; background: rgba(255,255,255,.055); border: 1px solid var(--line); border-radius: 999px; padding: 5px 9px; font-size: .68rem; font-weight: 950; white-space: nowrap; transition: background .18s ease, color .18s ease, border-color .18s ease; }
+    .link-toggle.active { color: #061018; background: var(--lime); border-color: transparent; }
+    .link-field.is-disabled { opacity: .55; }
+    .link-field.is-disabled input { pointer-events: none; }
+    .platform-label { display:inline-flex; align-items:center; gap: 6px; }
+    .platform-label.spotify { color: #1ed760; }
+    .platform-label.apple { color: #fc3c44; }
+    .add-artist-btn { width: 100%; min-height: 46px; margin-top: 4px; color: var(--cyan); background: rgba(0,229,255,.06); border: 1px dashed rgba(0,229,255,.32); border-radius: 16px; font-weight: 950; font-size: .84rem; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+    .add-artist-btn:hover { transform: translateY(-1px); background: rgba(0,229,255,.11); border-color: rgba(0,229,255,.5); }
+    .create-footer { position: sticky; bottom: 0; margin-top: 18px; padding-top: 16px; background: linear-gradient(180deg, rgba(8,14,24,0), rgba(8,14,24,.98) 24%); border-top: 1px solid rgba(255,255,255,.06); }
     .confirm-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:18px; }
 
     @media (max-width: 900px) {
       .topbar, .board-head { align-items:stretch; flex-direction:column; }
       .tabs { overflow-x:auto; flex-wrap:nowrap; padding-bottom:3px; }
       .profile-menu { right:auto; left:0; width:min(330px, calc(100vw - 48px)); }
-      .workspace { padding:16px; }
-      .board { min-height: 900px; }
+      .workspace { padding:16px 16px 48px; }
+      .board { min-height: 420px; }
       .note { width: min(330px, calc(100vw - 50px)); }
       .chat-card { width:min(100%, 100%); }
       .chat-compose { flex-direction:column; align-items:stretch; }
@@ -177,6 +216,8 @@
       .chat-status-row { align-items:flex-start; flex-direction:column; }
       .form-grid { grid-template-columns: 1fr; }
       .form-grid .wide { grid-column:auto; }
+      .link-grid { grid-template-columns: 1fr; }
+      .create-scroll { max-height: calc(92vh - 170px); }
     }
   </style>
 </head>
@@ -185,8 +226,8 @@
     <form class="login-card" id="loginForm">
       <div class="brand"><img src="assets/branding/label-icon.png" alt="" onerror="this.style.display='none'" /> Sigma Label LLC</div>
       <h1>Admin Login</h1>
-      <p>Use one of the approved Sigma admin emails. Passwords are handled by Supabase Auth, not by the front-end.</p>
-      <div class="field"><label>Email</label><input type="email" id="loginEmail" autocomplete="username" placeholder="admin@example.com" required /></div>
+      <p>Sign in with your Sigma Label admin credentials.</p>
+      <div class="field"><label>Email</label><input type="email" id="loginEmail" autocomplete="username" placeholder="Your admin email" required /></div>
       <div class="field"><label>Password</label><input type="password" id="loginPassword" autocomplete="current-password" placeholder="Password" required /></div>
       <button class="primary-btn full" type="submit">Log in</button>
       <div class="status-line" id="loginStatus"></div>
@@ -208,7 +249,9 @@
         <button class="profile-badge" id="profileToggle"><span class="avatar" id="avatar">S</span><span id="profileEmail">admin</span> ▾</button>
         <div class="profile-menu">
           <h3>Admin Profile</h3>
-          <div class="field"><label>New password</label><input type="password" id="newPassword" autocomplete="new-password" placeholder="Enter new password" /></div>
+          <div class="field"><label>Current password</label><input type="password" id="currentPassword" autocomplete="current-password" placeholder="Current password" /></div>
+          <div class="field"><label>New password</label><input type="password" id="newPassword" autocomplete="new-password" placeholder="At least 8 characters" /></div>
+          <div class="field"><label>Confirm new password</label><input type="password" id="confirmPassword" autocomplete="new-password" placeholder="Repeat new password" /></div>
           <button class="primary-btn full" id="changePasswordBtn" type="button">Change password</button>
           <div class="menu-actions"><button class="secondary-btn" id="logoutBtn" type="button">Log out</button></div>
           <div class="status-line" id="profileStatus"></div>
@@ -260,20 +303,55 @@
 
   <div class="create-modal hidden" id="createReleaseModal">
     <form class="modal-card" id="createReleaseForm">
-      <div class="modal-head"><h2>Create Release</h2><button class="ghost-btn" id="closeCreateReleaseBtn" type="button">Close</button></div>
-      <div class="modal-body">
-        <div class="form-grid">
-          <div class="field"><label>Release title *</label><input type="text" id="manualReleaseTitle" placeholder="Release title" required /></div>
-          <div class="field"><label>Preferred release date</label><input type="date" id="manualReleaseDate" /></div>
-          <div class="field"><label>Artist name *</label><input type="text" id="manualArtistName" placeholder="Public artist name" required /></div>
-          <div class="field"><label>Legal name</label><input type="text" id="manualLegalName" placeholder="Optional legal name" /></div>
-          <div class="field"><label>Contact email *</label><input type="email" id="manualContactEmail" placeholder="artist@example.com" required /></div>
-          <div class="field"><label>Platform</label><input type="text" id="manualReleasePlatform" placeholder="TikTok / Email / Instagram / Other" /></div>
-          <div class="field wide"><label>Release link</label><input type="url" id="manualReleaseLink" placeholder="https://drive.google.com/..." /></div>
-          <div class="field wide"><label>Admin notes</label><textarea id="manualNotes" placeholder="Where did this come from? TikTok DM, email, private contact, etc."></textarea></div>
+      <div class="modal-head">
+        <div>
+          <h2>New Release</h2>
+          <p class="create-modal-sub">Add a release directly to the Releases board with full artist details.</p>
         </div>
-        <div class="confirm-actions"><button class="secondary-btn" id="cancelCreateReleaseBtn" type="button">Cancel</button><button class="primary-btn" type="submit">Create on Releases Board</button></div>
-        <div class="status-line" id="createReleaseStatus"></div>
+        <button class="ghost-btn" id="closeCreateReleaseBtn" type="button">Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="create-scroll">
+          <div class="form-stage">
+            <span class="form-stage-badge">1</span>
+            <h3>Artists</h3>
+            <p>Add every credited artist on the release</p>
+          </div>
+          <div id="manualArtistsContainer"></div>
+          <button class="add-artist-btn" id="addManualArtistBtn" type="button">+ Add another artist</button>
+
+          <hr class="create-divider" />
+
+          <div class="form-stage">
+            <span class="form-stage-badge">2</span>
+            <h3>Release</h3>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Release title *</label><input type="text" id="manualReleaseTitle" placeholder="e.g. SIGMA FUNK" required /></div>
+            <div class="field"><label>Preferred release date</label><input type="date" id="manualReleaseDate" /></div>
+            <div class="field"><label>Source platform</label><input type="text" id="manualReleasePlatform" placeholder="TikTok / Email / Instagram / Other" /></div>
+            <div class="field wide"><label>Release link</label><input type="url" id="manualReleaseLink" placeholder="https://drive.google.com/..." /></div>
+          </div>
+
+          <hr class="create-divider" />
+
+          <div class="form-stage">
+            <span class="form-stage-badge">3</span>
+            <h3>Contact & Notes</h3>
+          </div>
+          <div class="form-grid">
+            <div class="field wide"><label>Contact email *</label><input type="email" id="manualContactEmail" placeholder="artist@example.com" required /></div>
+            <div class="field wide"><label>Admin notes</label><textarea id="manualNotes" placeholder="Where did this come from? TikTok DM, email, private contact, etc."></textarea></div>
+          </div>
+        </div>
+
+        <div class="create-footer">
+          <div class="confirm-actions">
+            <button class="secondary-btn" id="cancelCreateReleaseBtn" type="button">Cancel</button>
+            <button class="primary-btn" type="submit">Create on Releases Board</button>
+          </div>
+          <div class="status-line" id="createReleaseStatus"></div>
+        </div>
       </div>
     </form>
   </div>
@@ -310,7 +388,9 @@
     const avatar = document.getElementById("avatar");
     const profileStatus = document.getElementById("profileStatus");
     const changePasswordBtn = document.getElementById("changePasswordBtn");
+    const currentPassword = document.getElementById("currentPassword");
     const newPassword = document.getElementById("newPassword");
+    const confirmPassword = document.getElementById("confirmPassword");
     const logoutBtn = document.getElementById("logoutBtn");
     const chatModal = document.getElementById("chatModal");
     const closeChatBtn = document.getElementById("closeChatBtn");
@@ -331,6 +411,10 @@
     const closeCreateReleaseBtn = document.getElementById("closeCreateReleaseBtn");
     const cancelCreateReleaseBtn = document.getElementById("cancelCreateReleaseBtn");
     const createReleaseStatus = document.getElementById("createReleaseStatus");
+    const manualArtistsContainer = document.getElementById("manualArtistsContainer");
+    const addManualArtistBtn = document.getElementById("addManualArtistBtn");
+
+    let manualArtistCount = 0;
 
     const viewConfig = {
       submissions: { title: "Submissions", subtitle: "Pending songs waiting for an admin decision.", status: "pending" },
@@ -339,6 +423,11 @@
       trash: { title: "Trash", subtitle: "Rejected submissions stay here for 7 days, then get permanently deleted.", status: "rejected" }
     };
 
+    const NOTE_WIDTH = 320;
+    const NOTE_GAP = 20;
+    const NOTE_ROW_HEIGHT = 430;
+    const NOTE_PADDING = 16;
+
     let activeView = "submissions";
     let currentUser = null;
     let allItems = [];
@@ -346,10 +435,23 @@
     let chatMessageCache = [];
     let chatRefreshTimer = null;
     let pendingConfirm = null;
+    let activeAccessToken = null;
+    let sessionBootstrapDone = false;
+    let sessionInitPromise = null;
+    let loadBoardPromise = null;
 
     function setStatus(element, message, kind = "") {
       element.textContent = message || "";
       element.className = `status-line ${kind}`;
+    }
+
+    function withTimeout(promise, ms, timeoutMessage) {
+      return Promise.race([
+        promise,
+        new Promise((_, reject) => {
+          setTimeout(() => reject(new Error(timeoutMessage)), ms);
+        })
+      ]);
     }
 
     async function checkAdminAccess() {
@@ -420,6 +522,34 @@
       return item.primary_artist || item.artists?.[0]?.artist_name || "Unknown artist";
     }
 
+    function normalizeUrl(value) {
+      const url = String(value || "").trim();
+      if (!url || url === "#" || url.toLowerCase() === "n/a") return "";
+      return url;
+    }
+
+    function platformIcon(type) {
+      if (type === "spotify") {
+        return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>`;
+      }
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>`;
+    }
+
+    function renderPlatformLink(url, type) {
+      const safeUrl = normalizeUrl(url);
+      if (!safeUrl) return "";
+      const label = type === "spotify" ? "Open on Spotify" : "Open on Apple Music";
+      return `<a class="platform-link platform-${type}" href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" title="${label}" aria-label="${label}">${platformIcon(type)}</a>`;
+    }
+
+    function renderArtistRow(artist) {
+      const name = escapeHtml(artist.artist_name || "Artist");
+      const legal = artist.legal_name ? `<span class="artist-legal">Legal: ${escapeHtml(artist.legal_name)}</span>` : "";
+      const icons = [renderPlatformLink(artist.spotify, "spotify"), renderPlatformLink(artist.apple_music, "apple")].filter(Boolean).join("");
+      const iconRow = icons ? `<div class="platform-icons">${icons}</div>` : "";
+      return `<div class="artist-row"><div class="artist-head"><strong>${name}</strong>${iconRow}</div>${legal}</div>`;
+    }
+
     function itemMatchesSearch(item, query) {
       if (!query) return true;
       const text = [item.release_title, item.primary_artist, item.contact_email, item.release_link, JSON.stringify(item.artists || [])].join(" ").toLowerCase();
@@ -433,24 +563,74 @@
 
     async function showApp(session) {
       currentUser = session?.user || null;
-      if (!currentUser || !(await checkAdminAccess())) {
+      if (!currentUser) {
+        showLogin();
+        return;
+      }
+      activeAccessToken = session.access_token || activeAccessToken;
+
+      profileEmail.textContent = currentUser.email;
+      avatar.textContent = currentUser.email[0].toUpperCase();
+      loginView.classList.add("hidden");
+      appView.classList.remove("hidden");
+
+      const isAdmin = await checkAdminAccess();
+      if (!isAdmin) {
         await client.auth.signOut();
+        activeAccessToken = null;
         loginView.classList.remove("hidden");
         appView.classList.add("hidden");
         setStatus(loginStatus, "This account is not approved for Sigma Label admin access.", "error");
         return;
       }
-      profileEmail.textContent = currentUser.email;
-      avatar.textContent = currentUser.email[0].toUpperCase();
-      loginView.classList.add("hidden");
-      appView.classList.remove("hidden");
-      await ensureAdminProfile();
-      await cleanupOldMessages();
+
       await loadBoard();
+      ensureAdminProfile().catch(() => null);
+      cleanupOldMessages().catch(() => null);
+    }
+
+    async function handleSession(session) {
+      if (!session?.user) {
+        activeAccessToken = null;
+        showLogin();
+        return;
+      }
+
+      const boardStillLoading = board.textContent.includes("Loading admin board") || board.textContent.includes("Fetching Sigma Label submissions");
+      if (session.access_token === activeAccessToken && !appView.classList.contains("hidden") && !boardStillLoading && allItems.length) {
+        return;
+      }
+
+      if (sessionInitPromise) {
+        await sessionInitPromise;
+        const stillLoading = board.textContent.includes("Fetching Sigma Label submissions");
+        if (session.access_token === activeAccessToken && !stillLoading && allItems.length) {
+          return;
+        }
+      }
+
+      activeAccessToken = session.access_token;
+      sessionInitPromise = showApp(session);
+      try {
+        await sessionInitPromise;
+      } finally {
+        sessionInitPromise = null;
+      }
+    }
+
+    function queueSessionInit(session) {
+      sessionBootstrapDone = true;
+      setTimeout(() => {
+        handleSession(session).catch((error) => {
+          console.error("Session init failed:", error);
+          board.innerHTML = `<div class="empty"><div><strong>Admin board failed to start.</strong><span>${escapeHtml(error.message || String(error))}</span></div></div>`;
+        });
+      }, 0);
     }
 
     async function showLogin() {
       currentUser = null;
+      activeAccessToken = null;
       loginView.classList.remove("hidden");
       appView.classList.add("hidden");
     }
@@ -466,26 +646,99 @@
         return;
       }
       setStatus(loginStatus, "Logged in.", "success");
-      await showApp(data.session);
+      await handleSession(data.session);
     });
 
     profileToggle.addEventListener("click", () => profile.classList.toggle("open"));
     document.addEventListener("click", (event) => { if (!profile.contains(event.target)) profile.classList.remove("open"); });
 
     changePasswordBtn.addEventListener("click", async () => {
+      const current = currentPassword.value;
       const password = newPassword.value;
+      const confirm = confirmPassword.value;
+      const originalLabel = changePasswordBtn.textContent;
+
+      if (!current) {
+        setStatus(profileStatus, "Enter your current password.", "error");
+        return;
+      }
       if (!password || password.length < 8) {
-        setStatus(profileStatus, "Password must be at least 8 characters.", "error");
+        setStatus(profileStatus, "New password must be at least 8 characters.", "error");
         return;
       }
-      setStatus(profileStatus, "Updating password...");
-      const { error } = await client.auth.updateUser({ password });
-      if (error) {
-        setStatus(profileStatus, error.message, "error");
+      if (password !== confirm) {
+        setStatus(profileStatus, "New passwords do not match.", "error");
         return;
       }
-      newPassword.value = "";
-      setStatus(profileStatus, "Password updated for next login.", "success");
+      if (password === current) {
+        setStatus(profileStatus, "Choose a different password than your current one.", "error");
+        return;
+      }
+
+      changePasswordBtn.disabled = true;
+      changePasswordBtn.textContent = "Saving...";
+
+      try {
+        const email = currentUser?.email?.toLowerCase();
+        if (!email) {
+          throw new Error("You must be logged in to change your password.");
+        }
+
+        setStatus(profileStatus, "Verifying current password...");
+        const { error: verifyError } = await withTimeout(
+          client.auth.signInWithPassword({ email, password: current }),
+          15000,
+          "Verification timed out. Check your connection and try again."
+        );
+        if (verifyError) {
+          throw new Error("Current password is incorrect.");
+        }
+
+        setStatus(profileStatus, "Saving new password...");
+        const { error: updateError } = await withTimeout(
+          client.auth.updateUser({ password }),
+          15000,
+          "Password update timed out. Check your connection and try again."
+        );
+        if (updateError) {
+          throw new Error(updateError.message);
+        }
+
+        setStatus(profileStatus, "Confirming new password...");
+        await client.auth.signOut();
+        activeAccessToken = null;
+        const { data: loginData, error: loginError } = await withTimeout(
+          client.auth.signInWithPassword({ email, password }),
+          15000,
+          "Could not confirm the new password. Try logging in manually."
+        );
+        if (loginError) {
+          showLogin();
+          throw new Error(`Password may not have saved: ${loginError.message}`);
+        }
+
+        client.from("admin_profiles").upsert(
+          { user_id: loginData.user.id, email, password_updated_at: new Date().toISOString() },
+          { onConflict: "user_id" }
+        ).catch(() => null);
+
+        currentPassword.value = "";
+        newPassword.value = "";
+        confirmPassword.value = "";
+        changePasswordBtn.textContent = "Updated!";
+        setStatus(profileStatus, "Password updated successfully. Your new password is active.", "success");
+        await showApp(loginData.session);
+      } catch (error) {
+        setStatus(profileStatus, error.message || "Password update failed.", "error");
+        changePasswordBtn.textContent = originalLabel;
+      } finally {
+        changePasswordBtn.disabled = false;
+        setTimeout(() => {
+          if (changePasswordBtn.textContent === "Updated!") {
+            changePasswordBtn.textContent = originalLabel;
+          }
+        }, 3000);
+      }
     });
 
     logoutBtn.addEventListener("click", async () => {
@@ -502,10 +755,140 @@
     });
 
     searchInput.addEventListener("input", () => renderBoard(allItems));
+    window.addEventListener("resize", () => {
+      if (!appView.classList.contains("hidden") && allItems.length) renderBoard(allItems);
+    });
     refreshBtn.addEventListener("click", loadBoard);
-    newReleaseBtn.addEventListener("click", () => {
+
+    function buildManualArtistBlock(index) {
+      const requireName = index === 0 ? "required" : "";
+      return `
+        <div class="create-artist-block" data-index="${index}">
+          <div class="create-artist-head">
+            <span class="create-artist-index">Artist #${index + 1}</span>
+            <button class="create-remove-artist" type="button" data-action="remove-manual-artist" aria-label="Remove artist">×</button>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Artist name *</label><input type="text" data-artist-name placeholder="Public artist name" ${requireName} /></div>
+            <div class="field"><label>Legal name</label><input type="text" data-artist-legal placeholder="Full legal name" /></div>
+          </div>
+          <div class="link-grid">
+            <div class="field link-field" data-link-field="spotify">
+              <div class="field-head">
+                <label class="platform-label spotify">Spotify profile</label>
+                <button class="link-toggle" type="button" data-action="toggle-link" data-link="spotify">Not available</button>
+              </div>
+              <input type="url" data-artist-spotify placeholder="https://open.spotify.com/artist/..." />
+            </div>
+            <div class="field link-field" data-link-field="apple">
+              <div class="field-head">
+                <label class="platform-label apple">Apple Music</label>
+                <button class="link-toggle" type="button" data-action="toggle-link" data-link="apple">Not available</button>
+              </div>
+              <input type="url" data-artist-apple placeholder="https://music.apple.com/..." />
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renumberManualArtists() {
+      const blocks = manualArtistsContainer.querySelectorAll(".create-artist-block");
+      blocks.forEach((block, idx) => {
+        block.dataset.index = String(idx);
+        const label = block.querySelector(".create-artist-index");
+        if (label) label.textContent = `Artist #${idx + 1}`;
+        const nameInput = block.querySelector("[data-artist-name]");
+        if (nameInput) {
+          if (idx === 0) nameInput.setAttribute("required", "");
+          else nameInput.removeAttribute("required");
+        }
+        const removeBtn = block.querySelector("[data-action='remove-manual-artist']");
+        if (removeBtn) removeBtn.style.display = blocks.length <= 1 ? "none" : "grid";
+      });
+    }
+
+    function addManualArtist(focusName = true) {
+      manualArtistsContainer.insertAdjacentHTML("beforeend", buildManualArtistBlock(manualArtistCount));
+      manualArtistCount += 1;
+      renumberManualArtists();
+      if (focusName) {
+        manualArtistsContainer.lastElementChild?.querySelector("[data-artist-name]")?.focus();
+      }
+    }
+
+    function removeManualArtist(block) {
+      const blocks = manualArtistsContainer.querySelectorAll(".create-artist-block");
+      if (blocks.length <= 1) return;
+      block.remove();
+      renumberManualArtists();
+    }
+
+    function toggleManualLinkField(button) {
+      const block = button.closest(".link-field");
+      const linkType = button.dataset.link;
+      const input = block?.querySelector(linkType === "spotify" ? "[data-artist-spotify]" : "[data-artist-apple]");
+      if (!input) return;
+      const isActive = button.classList.toggle("active");
+      button.textContent = isActive ? "Marked N/A" : "Not available";
+      button.setAttribute("aria-pressed", String(isActive));
+      if (isActive) {
+        input.value = "";
+        input.disabled = true;
+        block.classList.add("is-disabled");
+      } else {
+        input.disabled = false;
+        block.classList.remove("is-disabled");
+      }
+    }
+
+    function resetManualReleaseForm() {
       createReleaseForm.reset();
+      manualArtistCount = 0;
+      manualArtistsContainer.innerHTML = "";
+      addManualArtist(false);
+      manualArtistsContainer.querySelectorAll(".link-toggle").forEach((button) => {
+        button.classList.remove("active");
+        button.textContent = "Not available";
+        button.setAttribute("aria-pressed", "false");
+      });
+      manualArtistsContainer.querySelectorAll(".link-field").forEach((field) => field.classList.remove("is-disabled"));
+      manualArtistsContainer.querySelectorAll("[data-artist-spotify], [data-artist-apple]").forEach((input) => {
+        input.disabled = false;
+      });
       setStatus(createReleaseStatus, "");
+    }
+
+    function collectManualArtists() {
+      return Array.from(manualArtistsContainer.querySelectorAll(".create-artist-block")).map((block, idx) => {
+        const artistName = block.querySelector("[data-artist-name]")?.value.trim() || "";
+        const legalName = block.querySelector("[data-artist-legal]")?.value.trim() || "";
+        const spotifyDisabled = block.querySelector("[data-link-field='spotify'] .link-toggle")?.classList.contains("active");
+        const appleDisabled = block.querySelector("[data-link-field='apple'] .link-toggle")?.classList.contains("active");
+        const spotify = spotifyDisabled ? null : block.querySelector("[data-artist-spotify]")?.value.trim() || null;
+        const appleMusic = appleDisabled ? null : block.querySelector("[data-artist-apple]")?.value.trim() || null;
+        return {
+          index: idx + 1,
+          artist_name: artistName,
+          legal_name: legalName,
+          spotify,
+          apple_music: appleMusic
+        };
+      }).filter((artist) => artist.artist_name);
+    }
+
+    addManualArtistBtn.addEventListener("click", () => addManualArtist(true));
+    manualArtistsContainer.addEventListener("click", (event) => {
+      const removeBtn = event.target.closest("[data-action='remove-manual-artist']");
+      if (removeBtn) {
+        removeManualArtist(removeBtn.closest(".create-artist-block"));
+        return;
+      }
+      const toggleBtn = event.target.closest("[data-action='toggle-link']");
+      if (toggleBtn) toggleManualLinkField(toggleBtn);
+    });
+
+    newReleaseBtn.addEventListener("click", () => {
+      resetManualReleaseForm();
       createReleaseModal.classList.remove("hidden");
       document.getElementById("manualReleaseTitle")?.focus();
     });
@@ -517,15 +900,21 @@
 
     async function createManualRelease(event) {
       event.preventDefault();
+      const artists = collectManualArtists();
+      if (!artists.length) {
+        setStatus(createReleaseStatus, "Add at least one artist with a name.", "error");
+        manualArtistsContainer.querySelector("[data-artist-name]")?.focus();
+        return;
+      }
+
       setStatus(createReleaseStatus, "Creating release...");
       const releaseTitle = document.getElementById("manualReleaseTitle").value.trim();
-      const artistName = document.getElementById("manualArtistName").value.trim();
-      const legalName = document.getElementById("manualLegalName").value.trim();
       const contactEmail = document.getElementById("manualContactEmail").value.trim();
       const preferredDate = document.getElementById("manualReleaseDate").value || null;
       const releaseLink = document.getElementById("manualReleaseLink").value.trim();
       const releasePlatform = document.getElementById("manualReleasePlatform").value.trim() || "admin_manual";
       const notes = document.getElementById("manualNotes").value.trim();
+      const primaryArtist = artists.map((artist) => artist.artist_name).join(", ");
 
       const payload = {
         status: "accepted",
@@ -534,8 +923,8 @@
         release_platform: releasePlatform,
         release_link: releaseLink || null,
         contact_email: contactEmail,
-        primary_artist: artistName,
-        artists: [{ artist_name: artistName, legal_name: legalName || "" }],
+        primary_artist: primaryArtist,
+        artists,
         additional_versions: [],
         notes: notes ? `Admin-created release. ${notes}` : "Admin-created release.",
         submitted_from: "admin_manual",
@@ -576,27 +965,104 @@
     }
 
     async function loadBoard() {
-      const config = viewConfig[activeView];
-      boardTitle.textContent = config.title;
-      boardSubtitle.textContent = config.subtitle;
-      board.innerHTML = `<div class="empty"><div><strong>Loading...</strong><span>Fetching Sigma Label submissions.</span></div></div>`;
+      if (loadBoardPromise) {
+        return loadBoardPromise;
+      }
+
+      loadBoardPromise = (async () => {
+        const config = viewConfig[activeView];
+        boardTitle.textContent = config.title;
+        boardSubtitle.textContent = config.subtitle;
+        board.innerHTML = `<div class="empty"><div><strong>Loading...</strong><span>Fetching Sigma Label submissions.</span></div></div>`;
+
+        try {
+          const { data, error } = await withTimeout(
+            client.from("submissions").select("*").eq("status", config.status).order("created_at", { ascending: false }),
+            20000,
+            "Loading submissions timed out. Click Refresh to try again."
+          );
+          if (error) {
+            board.innerHTML = `<div class="empty"><div><strong>Database setup needed.</strong><span>${escapeHtml(error.message)}</span></div></div>`;
+            allItems = [];
+            return;
+          }
+          allItems = data || [];
+          renderBoard(allItems);
+          cleanupOldTrash().catch((error) => console.warn("Trash cleanup skipped:", error));
+        } catch (error) {
+          board.innerHTML = `<div class="empty"><div><strong>Admin board error.</strong><span>${escapeHtml(error.message || String(error))}</span></div></div>`;
+          allItems = [];
+        }
+      })();
 
       try {
-        const { data, error } = await client.from("submissions").select("*").eq("status", config.status).order("created_at", { ascending: false });
-        if (error) {
-          board.innerHTML = `<div class="empty"><div><strong>Database setup needed.</strong><span>${escapeHtml(error.message)}</span></div></div>`;
-          allItems = [];
-          return;
-        }
-        allItems = data || [];
-        renderBoard(allItems);
-
-        // Cleanup runs after the board renders so it can never block submissions from appearing.
-        cleanupOldTrash().catch((error) => console.warn("Trash cleanup skipped:", error));
-      } catch (error) {
-        board.innerHTML = `<div class="empty"><div><strong>Admin board error.</strong><span>${escapeHtml(error.message || String(error))}</span></div></div>`;
-        allItems = [];
+        await loadBoardPromise;
+      } finally {
+        loadBoardPromise = null;
       }
+    }
+
+    function getBoardColumns() {
+      const width = board.clientWidth || 1880;
+      return Math.max(1, Math.floor((width - NOTE_PADDING * 2 + NOTE_GAP) / (NOTE_WIDTH + NOTE_GAP)));
+    }
+
+    function positionsOverlap(a, b) {
+      return Math.abs(a.x - b.x) < NOTE_WIDTH + NOTE_GAP && Math.abs(a.y - b.y) < NOTE_ROW_HEIGHT;
+    }
+
+    function isPositionFree(position, placed) {
+      return !placed.some((existing) => positionsOverlap(position, existing));
+    }
+
+    function gridPosition(index, columns = getBoardColumns()) {
+      const col = index % columns;
+      const row = Math.floor(index / columns);
+      return {
+        x: NOTE_PADDING + col * (NOTE_WIDTH + NOTE_GAP),
+        y: NOTE_PADDING + row * NOTE_ROW_HEIGHT
+      };
+    }
+
+    function resolveBoardPositions(items) {
+      const columns = getBoardColumns();
+      const placed = [];
+      return items.map((item, index) => {
+        const saved = item.board_position?.[activeView];
+        const savedPosition = saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)
+          ? { x: saved.x, y: saved.y }
+          : null;
+
+        if (savedPosition && isPositionFree(savedPosition, placed)) {
+          placed.push(savedPosition);
+          return savedPosition;
+        }
+
+        for (let attempt = 0; attempt < Math.max(items.length * 2, 8); attempt += 1) {
+          const candidate = gridPosition(index + attempt, columns);
+          if (isPositionFree(candidate, placed)) {
+            placed.push(candidate);
+            return candidate;
+          }
+        }
+
+        const fallback = gridPosition(index, columns);
+        placed.push(fallback);
+        return fallback;
+      });
+    }
+
+    function syncBoardHeight() {
+      const notes = board.querySelectorAll(".note");
+      if (!notes.length) {
+        board.style.minHeight = "420px";
+        return;
+      }
+      let maxBottom = NOTE_PADDING;
+      notes.forEach((note) => {
+        maxBottom = Math.max(maxBottom, note.offsetTop + note.offsetHeight);
+      });
+      board.style.minHeight = `${maxBottom + NOTE_PADDING}px`;
     }
 
     function renderBoard(items) {
@@ -604,22 +1070,17 @@
       const filtered = items.filter((item) => itemMatchesSearch(item, query));
       board.innerHTML = "";
       if (!filtered.length) {
+        board.style.minHeight = "420px";
         board.innerHTML = `<div class="empty"><div><strong>No items in ${escapeHtml(viewConfig[activeView].title)}.</strong><span>Nothing matches the current filter.</span></div></div>`;
         return;
       }
-      filtered.forEach((item, index) => board.appendChild(createNote(item, index)));
+      const positions = resolveBoardPositions(filtered);
+      filtered.forEach((item, index) => board.appendChild(createNote(item, positions[index])));
+      requestAnimationFrame(() => syncBoardHeight());
     }
 
-    function getPosition(item, index) {
-      const saved = item.board_position?.[activeView];
-      if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) return saved;
-      const columns = Math.max(1, Math.floor((board.clientWidth - 36) / 340));
-      return { x: 16 + (index % columns) * 340, y: 16 + Math.floor(index / columns) * 430 };
-    }
-
-    function createNote(item, index) {
+    function createNote(item, position) {
       const note = document.createElement("article");
-      const position = getPosition(item, index);
       note.className = `note ${dueClass(item)} ${activeView === "released" ? "released-note" : ""}`;
       note.style.left = `${position.x}px`;
       note.style.top = `${position.y}px`;
@@ -627,23 +1088,27 @@
 
       const artists = Array.isArray(item.artists) ? item.artists : [];
       const versions = Array.isArray(item.additional_versions) ? item.additional_versions : [];
+      const primaryArtist = getPrimaryArtist(item);
       const cover = item.cover_art_url ? `<img class="cover-preview" src="${escapeHtml(item.cover_art_url)}" alt="Cover art preview" onerror="this.remove()" />` : "";
       const notes = item.notes ? `<div class="meta"><small>Notes</small><span>${escapeHtml(item.notes)}</span></div>` : "";
       const trashMeta = activeView === "trash" ? `<div class="meta"><small>Trash Retention</small><span>${escapeHtml(trashRetentionLabel(item))}</span></div>` : "";
-      const artistRows = artists.length ? artists.map((artist) => `<div class="artist-row"><strong>${escapeHtml(artist.artist_name || "Artist")}</strong><span>Legal: ${escapeHtml(artist.legal_name || "N/A")}</span></div>`).join("") : `<div class="artist-row"><strong>${escapeHtml(item.primary_artist || "Unknown artist")}</strong><span>Legal: N/A</span></div>`;
+      const artistRows = artists.length
+        ? artists.map((artist) => renderArtistRow(artist)).join("")
+        : renderArtistRow({ artist_name: primaryArtist, legal_name: "", spotify: null, apple_music: null });
 
       note.innerHTML = `
-        <div class="note-top"><div><h2>${escapeHtml(item.release_title || "Untitled Release")}</h2><div class="pill-row"><span class="pill due-pill">${escapeHtml(dueLabel(item))}</span><span class="pill">${escapeHtml(item.status)}</span></div></div><div class="drag-handle" title="Drag note">⋮⋮</div></div>
+        <div class="note-top"><div><h2>${escapeHtml(item.release_title || "Untitled Release")}</h2><div class="release-artist">${escapeHtml(primaryArtist)}</div><div class="pill-row"><span class="pill due-pill">${escapeHtml(dueLabel(item))}</span><span class="pill">${escapeHtml(item.status)}</span></div></div><div class="drag-handle" title="Drag note">⋮⋮</div></div>
         ${cover}
+        <div class="artists-label">Artist Details</div>
+        <div class="artists">${artistRows}</div>
         <div class="meta-grid">
           <div class="meta"><small>Preferred Release Date</small><span>${escapeHtml(formatDate(item.preferred_release_date))}</span></div>
           <div class="meta"><small>Contact Email</small><span>${escapeHtml(item.contact_email || "N/A")}</span></div>
-          <div class="meta"><small>Release Link</small><a href="${escapeHtml(item.release_link || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.release_link || "N/A")}</a></div>
+          <div class="meta"><small>Release Link</small>${item.release_link ? `<a href="${escapeHtml(item.release_link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.release_link)}</a>` : `<span>N/A</span>`}</div>
           <div class="meta"><small>Platform / Versions</small><span>${escapeHtml((item.release_platform || "N/A").replace("_", " "))}${versions.length ? " · " + escapeHtml(versions.join(", ")) : ""}</span></div>
           ${trashMeta}
           ${notes}
         </div>
-        <div class="artists">${artistRows}</div>
         ${renderActions(item)}
       `;
 
@@ -779,17 +1244,21 @@
       });
       handle.addEventListener("pointermove", (event) => {
         if (!dragging) return;
-        const maxX = Math.max(0, board.scrollWidth - note.offsetWidth - 18);
-        const maxY = Math.max(0, board.scrollHeight - note.offsetHeight - 18);
+        const maxX = Math.max(0, board.clientWidth - note.offsetWidth - NOTE_PADDING);
         const x = Math.min(maxX, Math.max(0, originalX + event.clientX - startX));
-        const y = Math.min(maxY, Math.max(0, originalY + event.clientY - startY));
+        const y = Math.max(0, originalY + event.clientY - startY);
         note.style.left = `${x}px`;
         note.style.top = `${y}px`;
+        const bottom = y + note.offsetHeight + NOTE_PADDING;
+        if (bottom > board.offsetHeight) {
+          board.style.minHeight = `${bottom}px`;
+        }
       });
       handle.addEventListener("pointerup", async () => {
         if (!dragging) return;
         dragging = false;
         note.classList.remove("dragging");
+        syncBoardHeight();
         const current = item.board_position && typeof item.board_position === "object" ? item.board_position : {};
         const nextPosition = { ...current, [activeView]: { x: parseFloat(note.style.left) || 0, y: parseFloat(note.style.top) || 0 } };
         item.board_position = nextPosition;
@@ -895,20 +1364,35 @@
       }
     });
 
-    client.auth.getSession()
-      .then(({ data, error }) => {
-        if (error) {
-          board.innerHTML = `<div class="empty"><div><strong>Auth error.</strong><span>${escapeHtml(error.message)}</span></div></div>`;
-          showLogin();
-          return;
-        }
-        if (data.session) showApp(data.session);
-        else showLogin();
-      })
-      .catch((error) => {
-        board.innerHTML = `<div class="empty"><div><strong>Admin board failed to start.</strong><span>${escapeHtml(error.message || String(error))}</span></div></div>`;
+    client.auth.onAuthStateChange((event, session) => {
+      if (event === "INITIAL_SESSION" || event === "SIGNED_IN") {
+        queueSessionInit(session);
+        return;
+      }
+      if (event === "SIGNED_OUT") {
+        activeAccessToken = null;
         showLogin();
-      });
+      }
+    });
+
+    setTimeout(() => {
+      if (sessionBootstrapDone) return;
+      withTimeout(client.auth.getSession(), 12000, "Session check timed out.")
+        .then(({ data, error }) => {
+          if (sessionBootstrapDone) return;
+          if (error) {
+            setStatus(loginStatus, error.message, "error");
+            showLogin();
+            return;
+          }
+          queueSessionInit(data.session);
+        })
+        .catch((error) => {
+          if (sessionBootstrapDone) return;
+          setStatus(loginStatus, error.message || "Could not start the admin board.", "error");
+          showLogin();
+        });
+    }, 0);
   </script>
 </body>
 </html>
